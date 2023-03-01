@@ -11,7 +11,7 @@ class HotelManagementSystem:
     def __init__(self, root):
         self.root = root
         self.root.title("Hotel Management System")
-        self.root.geometry("1550x800+0+0")
+        self.root.geometry("1350x800+0+0")
 
         # ***********************FIRST IMAGE*****************************
 
@@ -19,37 +19,37 @@ class HotelManagementSystem:
         img1 = Image.open(
             r"E:\Django files\Hotel Managment System\images\hotel.jpg")
         # Antialias converts the low level images to the high level images
-        img1 = img1.resize((1550, 140), Image.ANTIALIAS)
+        img1 = img1.resize((1350, 90), Image.ANTIALIAS)
         self.photoimg1 = ImageTk.PhotoImage(img1)
 
         # Label is taken from the Tkinter module
         lblimg = Label(self.root, image=self.photoimg1, bd=4, relief=RIDGE)
         # placing the image in the html page
-        lblimg.place(x=0, y=0, width=1550, height=140)
+        lblimg.place(x=0, y=0, width=1350, height=90)
 
         # ***************************LOGO**********************************
         # r is used before the link to convert all the forwardlash to backlash
         img2 = Image.open(
             r"E:\Django files\Hotel Managment System\images\logo.jpg")
         # Antialias converts the low level images to the high level images
-        img2 = img2.resize((230, 140), Image.ANTIALIAS)
+        img2 = img2.resize((230, 90), Image.ANTIALIAS)
         self.photoimg2 = ImageTk.PhotoImage(img2)
 
         # Label is taken from the Tkinter module
         lblimg = Label(self.root, image=self.photoimg2, bd=4, relief=RIDGE)
         # placing the image in the html page
-        lblimg.place(x=0, y=0, width=230, height=140)
+        lblimg.place(x=0, y=0, width=230, height=90)
 
         # ********************LABEL*********************************
         lbl_title = Label(self.root, text="HOTEL MANAGEMENT SYSTEM", font=(
             "times new roman", 40, "bold"), bg="black", fg="gold", bd=4, relief=RIDGE)
-        lbl_title.place(x=0, y=140, width=1550, height=50)
+        lbl_title.place(x=0, y=90, width=1350, height=50)
 
         # **************************MAIN FRAME*************************
         # This frame is pre-defined in the tkinter module
         main_frame = Frame(self.root, bd=4, relief=RIDGE)
         # Taken y==190 because we have taken the label y =140 and height=50
-        main_frame.place(x=0, y=190, width=1550, height=620)
+        main_frame.place(x=0, y=130, width=1350, height=620)
 
         # ***********************MENU*******************************
         lbl_menu = Label(main_frame, text="MENU", font=(

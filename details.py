@@ -15,7 +15,7 @@ class DetailRoom:
     def __init__(self, root):
         self.root = root
         self.root.title("Hotel Management System")
-        self.root.geometry("1295x550+230+220")
+        self.root.geometry("1050x550+230+170")
         
         
         # ********************title*********************************
@@ -41,7 +41,7 @@ class DetailRoom:
         # **************************LABEL FRAME************************
         labelframeleft = LabelFrame(self.root, bd=2, relief=RIDGE, text="New Room Add", font=(
             "times new roman", 12, "bold"), padx=2)
-        labelframeleft.place(x=5, y=50, width=540, height=350)
+        labelframeleft.place(x=5, y=50, width=440, height=350)
         
         # Floor
         lbl_floor = Label(labelframeleft, text="Floor ", font=(
@@ -97,7 +97,7 @@ class DetailRoom:
         # *****************************table Frame Search System**************************
         Table_Frame = LabelFrame(self.root, bd=2, relief=RIDGE, text="Show Room Details", font=(
             "times new roman", 12, "bold"), padx=2)
-        Table_Frame.place(x=600, y=55, width=600, height=350)
+        Table_Frame.place(x=500, y=55, width=600, height=350)
         
         scroll_x = ttk.Scrollbar(Table_Frame, orient=HORIZONTAL)
         scroll_y = ttk.Scrollbar(Table_Frame, orient=VERTICAL)
