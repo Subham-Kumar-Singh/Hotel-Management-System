@@ -177,7 +177,7 @@ class Cus_Win:
             "arial", 11, "bold"), bg="black", fg="gold", width=10)
         btnDelete.grid(row=0, column=2, padx=1)
 
-        btnReset = Button(btn_frame, text="Reset", font=(
+        btnReset = Button(btn_frame, text="Reset",command=self.reset, font=(
             "arial", 11, "bold"), bg="black", fg="gold", width=10)
         btnReset.grid(row=0, column=3, padx=1)
 
@@ -190,21 +190,23 @@ class Cus_Win:
             "arial", 12, "bold"), padx=2, pady=6, bg="red", fg="white")
         lblSearchBy.grid(row=0, column=0, sticky=W, padx=2)
 
-        combo_search = ttk.Combobox(Table_Frame, font=(
+        self.search_var=StringVar()
+        combo_search = ttk.Combobox(Table_Frame, textvariable=self.search_var, font=(
             "arial", 12, "bold"), width=24, state='readonly')
         combo_search["value"] = ("Mobile", "Ref")
         combo_search.current(0)
         combo_search.grid(row=0, column=1, padx=2)
 
-        txtSearch = ttk.Entry(Table_Frame, width=24,
+        self.txt_search=StringVar()
+        txtSearch = ttk.Entry(Table_Frame,textvariable=self.txt_search ,width=24,
                               font=("arial", 13, "bold"))
         txtSearch.grid(row=0, column=2, padx=2)
 
-        btnSearch = Button(Table_Frame, text="Search", font=(
+        btnSearch = Button(Table_Frame,command=self.search, text="Search", font=(
             "arial", 11, "bold"), bg="black", fg="gold", width=10)
         btnSearch.grid(row=0, column=3, padx=2)
 
-        btnShowAll = Button(Table_Frame, text="Show All", font=(
+        btnShowAll = Button(Table_Frame,command=self.fetch_data, text="Show All", font=(
             "arial", 11, "bold"), bg="black", fg="gold", width=10)
         btnShowAll.grid(row=0, column=4, padx=2)
 
@@ -361,12 +363,37 @@ class Cus_Win:
         self.fetch_data()
         conn.close()
     
+    def reset(self):
+        # self.var_ref.set(""),
+        self.var_cust_name.set(""),
+        self.var_mother.set(""),
+        # self.var_gender.set(""),
+        self.var_post.set(""),
+        self.var_mobile.set(""),
+        # self.var_email.set(""),
+        # self.var_nationality.set(""),
+        # self.var_id_proof.set(""),
+        self.var_id_number.set(""),
+        self.var_address.set("")
+        
+        x=random.randint(1000,9999)
+        self.var_ref.set(str(x))
     
-            
     
-    
-    
-
+    def search(self):
+        conn=mysql.connector.connect(host="localhost",username="root",password="1511",database="management")
+        my_cursor=conn.cursor()
+        
+        # LIKE is a sql query
+        my_cursor.execute("select * from customer where "+str(self.search_var.get())+" LIKE '%"+str(self.txt_search.get())+"%'")
+        rows=my_cursor.fetchall()
+        if len(rows)!=0:
+            self.Cust_Details_Table.delete(*self.Cust_Details_Table.get_children())
+            for i in rows:
+                self.Cust_Details_Table.insert("",END,values=i)
+            conn.commit()
+        conn.close()
+        
 if __name__ == '__main__':
     root = Tk()
     obj = Cus_Win(root)
