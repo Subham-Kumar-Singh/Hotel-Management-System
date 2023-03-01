@@ -3,6 +3,7 @@ from tkinter import *
 from PIL import Image, ImageTk
 from customer import Cus_Win
 from room import Roombooking
+from details import DetailRoom
 
 class HotelManagementSystem:
     # window name:-root
@@ -71,7 +72,7 @@ class HotelManagementSystem:
             "times new roman", 15, "bold"), bg="black", fg="gold",bd=0,cursor="hand1")
         room_btn.grid(row=1,column=0,pady=1)
         
-        details_btn=Button(btn_frame,text='DETAILS',width=22,font=(
+        details_btn=Button(btn_frame,text='DETAILS',command=self.AddroomDetails,width=22,font=(
             "times new roman", 15, "bold"), bg="black", fg="gold",bd=0,cursor="hand1")
         details_btn.grid(row=2,column=0,pady=1)
         
@@ -129,7 +130,9 @@ class HotelManagementSystem:
         self.new_window=Toplevel(self.root)
         self.app=Roombooking(self.new_window)
 
-
+    def AddroomDetails(self):
+        self.new_window=Toplevel(self.root)
+        self.app=DetailRoom(self.new_window)
 
 
 

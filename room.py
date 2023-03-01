@@ -93,10 +93,15 @@ class Roombooking:
         label_RoomType = Label(labelframeleft, text="Room Type: ", font=(
             "arial", 12, "bold"), padx=2, pady=6)
         label_RoomType.grid(row=3, column=0, sticky=W)
+        
+        conn=mysql.connector.connect(host="localhost",username="root",password="1511",database="management")
+        my_cursor=conn.cursor()
+        my_cursor.execute("select RoomType from details")
+        ide=my_cursor.fetchall()
 
         combo_RoomType = ttk.Combobox(labelframeleft,textvariable=self.var_roomtype, font=(
             "arial", 12, "bold"), width=27, state="readonly")
-        combo_RoomType['value'] = ("TypeA", "TypeB", "TypeC")
+        combo_RoomType['value'] =ide
         combo_RoomType.current(0)
         combo_RoomType.grid(row=3,column=1)
         
@@ -104,10 +109,19 @@ class Roombooking:
         lblRoomAvailable = Label(labelframeleft, text="Available Room: ", font=(
             "arial", 12, "bold"), padx=2, pady=6)
         lblRoomAvailable.grid(row=4, column=0, sticky=W)
-
-        txtRoomAvailable = ttk.Entry(labelframeleft,textvariable=self.var_roomavailable, width=29,
-                              font=("arial", 13, "bold"))
-        txtRoomAvailable.grid(row=4, column=1)
+        # txtRoomAvailable = ttk.Entry(labelframeleft,textvariable=self.var_roomavailable, width=29,
+        #                       font=("arial", 13, "bold"))
+        # txtRoomAvailable.grid(row=4, column=1)
+        conn=mysql.connector.connect(host="localhost",username="root",password="1511",database="management")
+        my_cursor=conn.cursor()
+        my_cursor.execute("select RoomNo from details")
+        rows=my_cursor.fetchall()
+        
+        combo_RoomNo = ttk.Combobox(labelframeleft,textvariable=self.var_roomavailable, font=(
+            "arial", 12, "bold"), width=27, state="readonly")
+        combo_RoomNo['value'] = rows
+        combo_RoomNo.current(0)
+        combo_RoomNo.grid(row=4,column=1)
         
         # Meal
         lblMeal = Label(labelframeleft, text="Meal: ", font=(
