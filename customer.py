@@ -181,7 +181,7 @@ class Cus_Win:
             "arial", 11, "bold"), bg="black", fg="gold", width=10)
         btnReset.grid(row=0, column=3, padx=1)
 
-        # *****************************table Frame**************************
+        # *****************************table Frame Search System**************************
         Table_Frame = LabelFrame(self.root, bd=2, relief=RIDGE, text="View Details and Search System", font=(
             "times new roman", 12, "bold"), padx=2)
         Table_Frame.place(x=435, y=50, width=860, height=490)
