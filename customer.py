@@ -271,7 +271,7 @@ class Cus_Win:
             try:
                 conn=mysql.connector.connect(host="localhost",username="root",password="1511",database="management")
                 my_cursor=conn.cursor()
-                my_cursor.execute("Insert into customer values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(
+                my_cursor.execute("insert into customer values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(
                                                                             self.var_ref.get(),
                                                                             self.var_cust_name.get(),
                                                                             self.var_mother.get(),
@@ -285,6 +285,7 @@ class Cus_Win:
                                                                             self.var_address.get()
                                                                         ))
                 conn.commit()
+                self.fetch_data()
                 conn.close()
                 messagebox.showinfo("Success","customer has been added",parent=self.root)
             except Exception as es:
@@ -346,21 +347,21 @@ class Cus_Win:
             
     
     def mDelete(self):
-        mDelete=messagebox.askyesno("Hotel Management Systen","Do you want to delete this Customer",parent=self.root)
-        if mDelete>0:
+        mdelete=messagebox.askyesno("Hotel Management Systen","Do you want to delete this Customer",parent=self.root)
+        if mdelete>0:
             conn=mysql.connector.connect(host="localhost",username="root",password="1511",database="management")
             my_cursor=conn.cursor()
             query="delete from customer where Ref=%s"
             value=(self.var_ref.get(),)
             my_cursor.execute(query,value)
         else:
-            if not mDelete:
+            if not mdelete:
                 return 
         conn.commit()
         self.fetch_data()
         conn.close()
-            # my_cursor.execute("delete ")
-            
+    
+    
             
     
     
