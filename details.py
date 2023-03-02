@@ -69,9 +69,15 @@ class DetailRoom:
         lbl_RoomType.grid(row=2, column=0, sticky=W,padx=20)
 
         self.var_RoomType=StringVar()            
-        entry_RoomType = ttk.Entry(labelframeleft,textvariable=self.var_RoomType, width=20,
-                              font=("arial", 13, "bold"))
-        entry_RoomType.grid(row=2, column=1,sticky=W)
+        combo_RoomType = ttk.Combobox(labelframeleft,textvariable=self.var_RoomType, font=(
+            "arial", 12, "bold"), width=20, state="readonly")
+        combo_RoomType['value'] = ("TypeA", "TypeB", "TypeC")
+        combo_RoomType.current(0)
+
+        combo_RoomType.grid(row=2, column=1,sticky=W)
+        # entry_RoomType = ttk.Entry(labelframeleft,textvariable=self.var_RoomType, width=20,
+        #                       font=("arial", 13, "bold"))
+        # entry_RoomType.grid(row=2, column=1,sticky=W)
         
         # **************************btns****************************
         btn_frame = Frame(labelframeleft, bd=2, relief=RIDGE)

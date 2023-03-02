@@ -5,7 +5,7 @@ from customer import Cus_Win
 from room import Roombooking
 from details import DetailRoom
 
-class HotelManagementSystem:
+class Home:
     # window name:-root
     # window title:-title
     def __init__(self, root):
@@ -60,7 +60,7 @@ class HotelManagementSystem:
                 # This frame is pre-defined in the tkinter module
         btn_frame = Frame(main_frame, bd=4, relief=RIDGE)
         # Taken y==190 because we have taken the label y =140 and height=50
-        btn_frame.place(x=0, y=35, width=228, height=190)
+        btn_frame.place(x=0, y=35, width=228, height=124)
         
         
         # in the cust_btn i have used command for the calling of the function that will get started after a click on it 
@@ -72,17 +72,9 @@ class HotelManagementSystem:
             "times new roman", 15, "bold"), bg="black", fg="gold",bd=0,cursor="hand1")
         room_btn.grid(row=1,column=0,pady=1)
         
-        details_btn=Button(btn_frame,text='DETAILS',command=self.AddroomDetails,width=22,font=(
+        room_details_btn=Button(btn_frame,text='DETAILS',command=self.AddroomDetails,width=22,font=(
             "times new roman", 15, "bold"), bg="black", fg="gold",bd=0,cursor="hand1")
-        details_btn.grid(row=2,column=0,pady=1)
-        
-        report_btn=Button(btn_frame,text='REPORT',width=22,font=(
-            "times new roman", 15, "bold"), bg="black", fg="gold",bd=0,cursor="hand1")
-        report_btn.grid(row=3,column=0,pady=1)
-        
-        logout_btn=Button(btn_frame,text='LOG-OUT',width=22,font=(
-            "times new roman", 15, "bold"), bg="black", fg="gold",bd=0,cursor="hand1")
-        logout_btn.grid(row=4,column=0,pady=1)
+        room_details_btn.grid(row=2,column=0,pady=1)
         
         
         # ******************************RIGHT SIDE IMAGE**************************
@@ -107,7 +99,7 @@ class HotelManagementSystem:
         # Label is taken from the Tkinter module
         lblimg = Label(main_frame, image=self.photoimg4, bd=4, relief=RIDGE)
         # placing the image in the html page
-        lblimg.place(x=0, y=225, width=230, height=210)
+        lblimg.place(x=0, y=160, width=230, height=210)
         
         img5 = Image.open(
             r"E:\Django files\Hotel Managment System\images\reception.jpg")
@@ -118,7 +110,7 @@ class HotelManagementSystem:
         # Label is taken from the Tkinter module
         lblimg = Label(main_frame, image=self.photoimg5, bd=4, relief=RIDGE)
         # placing the image in the html page
-        lblimg.place(x=0, y=420, width=230, height=190)
+        lblimg.place(x=0, y=355, width=230, height=190)
         
 
 
@@ -138,5 +130,5 @@ class HotelManagementSystem:
 
 if __name__ == '__main__':
     root = Tk()
-    obj = HotelManagementSystem(root)
+    obj = Home(root)
     root.mainloop()

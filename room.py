@@ -23,7 +23,7 @@ class Roombooking:
         self.var_checkout=StringVar()
         self.var_roomtype=StringVar()
         self.var_roomavailable=StringVar()
-        self.var_meal=StringVar()
+        self.var_payment=StringVar()
         self.var_noofdays=StringVar()
         self.var_paidtax=StringVar()
         self.var_actualtotal=StringVar()
@@ -123,14 +123,20 @@ class Roombooking:
         combo_RoomNo.current(0)
         combo_RoomNo.grid(row=4,column=1, sticky=W)
         
-        # Meal
-        lblMeal = Label(labelframeleft, text="Meal: ", font=(
+        # Payment
+        lblPayment = Label(labelframeleft, text="Payment Mode: ", font=(
             "arial", 12, "bold"), padx=2, pady=6)
-        lblMeal.grid(row=5, column=0, sticky=W)
+        lblPayment.grid(row=5, column=0, sticky=W)
 
-        txtMeal = ttk.Entry(labelframeleft,textvariable=self.var_meal, width=23,
-                              font=("arial", 13, "bold"))
-        txtMeal.grid(row=5, column=1, sticky=W)
+        combo_payment = ttk.Combobox(labelframeleft,textvariable=self.var_payment, font=(
+            "arial", 12, "bold"), width=23, state="readonly")
+        combo_payment['value'] = ("Cash", "UPI", "Credit/Debit Card")
+        combo_payment.current(0)
+
+        combo_payment.grid(row=5, column=1,sticky=W)
+        # txtMeal = ttk.Entry(labelframeleft,textvariable=self.var_meal, width=23,
+        #                       font=("arial", 13, "bold"))
+        # txtMeal.grid(row=5, column=1, sticky=W)
         
         # No of days
         lblNoofDays = Label(labelframeleft, text="No of Days: ", font=(
@@ -234,7 +240,7 @@ class Roombooking:
         scroll_x = ttk.Scrollbar(details_table, orient=HORIZONTAL)
         scroll_y = ttk.Scrollbar(details_table, orient=VERTICAL)
 
-        self.room_table = ttk.Treeview(details_table, column=("contact", "checkinDate", "checkoutDate", "roomtype", "roomavailable", "meal",
+        self.room_table = ttk.Treeview(details_table, column=("contact", "checkinDate", "checkoutDate", "roomtype", "roomavailable", "payment",
                                                                     "noofdays"), xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
 
         # this is the way to pack our axis in the x-axis and the y-axis
@@ -251,7 +257,7 @@ class Roombooking:
         self.room_table.heading("checkoutDate", text="check-out")
         self.room_table.heading("roomtype", text="Room Type")
         self.room_table.heading("roomavailable", text="Room No")
-        self.room_table.heading("meal", text="Meal")
+        self.room_table.heading("payment", text="Payment")
         self.room_table.heading("noofdays", text="NoOfDays")
 
         # this is used to show all the headings of our table
@@ -264,7 +270,7 @@ class Roombooking:
         self.room_table.column("checkoutDate", width=100)
         self.room_table.column("roomtype", width=100)
         self.room_table.column("roomavailable", width=100)
-        self.room_table.column("meal", width=100)
+        self.room_table.column("payment", width=100)
         self.room_table.column("noofdays", width=100)
 
         # now we are packing our table
@@ -288,7 +294,7 @@ class Roombooking:
                                                                             self.var_checkout.get(),
                                                                             self.var_roomtype.get(),
                                                                             self.var_roomavailable.get(),
-                                                                            self.var_meal.get(),
+                                                                            self.var_payment.get(),
                                                                             self.var_noofdays.get()
                                                                         ))
                 conn.commit()
@@ -410,7 +416,7 @@ class Roombooking:
         self.var_checkout.set(row[2]),
         self.var_roomtype.set(row[3]),
         self.var_roomavailable.set(row[4]),
-        self.var_meal.set(row[5]),
+        self.var_payment.set(row[5]),
         self.var_noofdays.set(row[6])
         
     # *******************************Update***********************************
@@ -420,12 +426,12 @@ class Roombooking:
         else:
             conn=mysql.connector.connect(host="localhost",username="root",password="1511",database="management")
             my_cursor=conn.cursor()
-            my_cursor.execute("update room set check_in=%s,check_out=%s,roomtype=%s,roomavailable=%s,meal=%s,noOfdays=%s where Contact=%s",(
+            my_cursor.execute("update room set check_in=%s,check_out=%s,roomtype=%s,roomavailable=%s,payment=%s,noOfdays=%s where Contact=%s",(
                                                                                                                                 self.var_checkin.get(),
                                                                                                                                 self.var_checkout.get(),
                                                                                                                                 self.var_roomtype.get(),
                                                                                                                                 self.var_roomavailable.get(),
-                                                                                                                                self.var_meal.get(),
+                                                                                                                                self.var_payment.get(),
                                                                                                                                 self.var_noofdays.get(),
                                                                                                                                 self.var_contact.get()
                                                                                                                     ))
@@ -457,7 +463,7 @@ class Roombooking:
         self.var_checkout.set(""),
         self.var_roomtype.set(""),
         self.var_roomavailable.set(""),
-        self.var_meal.set(""),
+        self.var_payment.set(""),
         self.var_noofdays.set(""),
         self.var_paidtax.set(""),
         self.var_actualtotal.set(""),
@@ -476,9 +482,9 @@ class Roombooking:
         
         if self.var_roomtype.get()=="TypeA":
             q1=100
-            breakfast=200
+            # breakfast=200
             q3=float(self.var_noofdays.get())
-            total=float((q1+breakfast)*q3)
+            total=float((q1)*q3)
             Tax="Rs."+str("%.2f"%((total)*0.1))
             ST="Rs."+str("%.2f"%((total)))
             TT="Rs."+str("%.2f"%(total+((total)*0.1)))
@@ -488,9 +494,9 @@ class Roombooking:
         
         elif self.var_roomtype.get()=="TypeB":
             q1=80
-            breakfast=200
+            # breakfast=200
             q3=float(self.var_noofdays.get())
-            total=float((q1+breakfast)*q3)
+            total=float((q1)*q3)
             Tax="Rs."+str("%.2f"%((total)*0.1))
             ST="Rs."+str("%.2f"%((total)))
             TT="Rs."+str("%.2f"%(total+((total)*0.1)))
@@ -500,9 +506,9 @@ class Roombooking:
         
         elif self.var_roomtype.get()=="TypeC":
             q1=50
-            breakfast=200
+            # breakfast=200
             q3=float(self.var_noofdays.get())
-            total=float((q1+breakfast)*q3)
+            total=float((q1)*q3)
             Tax="Rs."+str("%.2f"%((total)*0.1))
             ST="Rs."+str("%.2f"%((total)))
             TT="Rs."+str("%.2f"%(total+((total)*0.1)))
